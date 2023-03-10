@@ -174,9 +174,53 @@ function EventRegister(props) {
     };
 
     function handleSubmit(event) {
-        event.preventDefault();
-        console.log('-----------Error Click----------------');
-        dispatch(Actions.registerUser(form));
+        if (validate()) {
+            event.preventDefault();
+            console.log('-----------Error Click----------------');
+            dispatch(Actions.registerUser(form));
+        }
+    }
+
+    function validate() {
+        var isError = false;
+        if (form.name == undefined) {
+            isError = true;
+            alert('Please Give Full Name');
+        }
+        if (form.collegeName == undefined) {
+            isError = true;
+            alert('Please Select a College Name');
+        }
+        if (form.clas == undefined) {
+            isError = true;
+            alert('Please give Class');
+        }
+        if (form.emailId == undefined) {
+            isError = true;
+            alert('Please give Email Id');
+        }
+        if (form.gender == undefined) {
+            isError = true;
+            alert('Please select Gender');
+        }
+        if (!form.contactNumber || form.contactNumber == NaN) {
+            isError = true;
+            alert('Please Give Mobile Number');
+        }
+        if (form.eventRegistered && form.eventRegistered.festType == undefined) {
+            isError = true;
+            alert('Please select Fest Type');
+        }
+        if (form.eventRegistered && form.eventRegistered.eventName == undefined) {
+            isError = true;
+            alert('Please select Event for which student is to be registered');
+        }
+
+        setForm({
+            ...form,
+            isValidate: !isError
+        });
+        return !isError;
     }
 
     const [events, setEvents] = useState(initialState);
@@ -463,7 +507,7 @@ function EventRegister(props) {
                                         <br />
                                     </Grid>
 
-                                    <Button variant="contained" onTouchStart={handleSubmit}>
+                                    <Button variant="contained" onClick={handleSubmit}>
                                         Submit
                                     </Button>
                                     <Grid>{/* <Button className={classes.formControl}>Submit</Button> */}</Grid>

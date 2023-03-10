@@ -4,7 +4,6 @@ import axios from 'axios';
 import * as Constants from 'app/constants';
 
 export function exportToExcel(params) {
-    debugger;
     const request = axios.post(Constants.BASE_URL + 'api/Report/exportReportToCSV', params, { 'content-type': 'application/json' });
     console.log(request);
     request
