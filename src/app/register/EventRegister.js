@@ -41,7 +41,7 @@ function EventRegister(props) {
     const dispatch = useDispatch();
     const initialState = {
         id: 0,
-        name: undefined,
+        fullName: undefined,
         emailId: undefined,
         clas: undefined,
         collegeName: undefined,
@@ -60,6 +60,7 @@ function EventRegister(props) {
     }, [colleges]);
 
     const { form, handleChange, setForm } = useForm(initialState);
+
     const collegeName = [
         { code: 'N.K College', displayName: 'N.K Collge' },
         {
@@ -183,7 +184,7 @@ function EventRegister(props) {
 
     function validate() {
         var isError = false;
-        if (form.name == undefined) {
+        if (form.fullName == undefined) {
             isError = true;
             alert('Please Give Full Name');
         }
@@ -246,14 +247,11 @@ function EventRegister(props) {
         console.log('====================================');
         let data = form;
 
-        console.log('=================itemitme===================');
-        console.log(events);
-        console.log('====================================');
         if (!data.collegeName) data.collegeName = [];
         // if (data.colleges) data.collegeList = data.colleges.split(',');
         // if (!data.eventRegistered) data.eventRegistered = [];
         // data.eventRegistered.push([{}]);
-        setForm(form);
+        setForm(data);
     }, [form]);
 
     const [formDisabled, setFormDisabled] = useState(false);
@@ -292,7 +290,7 @@ function EventRegister(props) {
                                                                 id="fullName"
                                                                 name="fullName"
                                                                 type="text"
-                                                                value={form.name}
+                                                                value={form.fullName}
                                                                 fullWidth
                                                                 onChange={handleChange}
                                                             />
